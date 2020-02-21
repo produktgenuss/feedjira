@@ -22,6 +22,8 @@ module Feedjira
       element :rss, as: :version, value: :version
       element :title
       element :ttl
+      elements :"atom:link", as: :hubs, value: :href, with: {rel: "hub"}
+      element :"atom:link", as: :self_url, value: :href, with: {rel: "self"}
 
       # If author is not present use managingEditor on the channel
       element :"itunes:author", as: :itunes_author
@@ -59,6 +61,8 @@ module Feedjira
 
       elements :"itunes:owner", as: :itunes_owners, class: ITunesRSSOwner
       elements :item, as: :entries, class: ITunesRSSItem
+
+      element :"itunes:block", as: :itunes_block
 
       def self.able_to_parse?(xml)
         %r{xmlns:itunes\s?=\s?[\"\']http://www\.itunes\.com/dtds/podcast-1\.0\.dtd[\"\']}i =~ xml # rubocop:disable Metrics/LineLength
