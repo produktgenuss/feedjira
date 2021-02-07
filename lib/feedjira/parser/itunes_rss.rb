@@ -47,6 +47,8 @@ module Feedjira
                                    class: ITunesRSSCategory
       private :_itunes_categories
 
+      element :"podcast:locked", as: :podcast_locked
+
       def itunes_categories
         _itunes_categories.flat_map do |itunes_category|
           itunes_category.enum_for(:each_subcategory).to_a
